@@ -77,9 +77,9 @@
                 Live demo & docs
             </a>
             &nbsp;&nbsp;
-            <a class="btn btn-lg btn-default" href="https://github.com/jakulov/meta-input/archive/master.zip">
+            <a class="btn btn-lg btn-default" href="https://github.com/jakulov/meta-input/archive/v0.1.zip">
                 <i class="glyphicon glyphicon-download-alt"></i>
-                Download .zip
+                Download .zip (v0.1)
             </a>
         </div>
         <a name="examples"></a>
@@ -188,17 +188,17 @@
                 <input type="text" name="example4" placeholder="Type to search" id="example4" class="form-control">
                 <script>
                     $(function(){
-                        $('#example4').meta_input({ajax: 'ajax.json'});
+                        $('#example4').meta_input({ajax: 'example.json'});
                     });
                 </script>
             </div>
             <div class="explain">
                 Using ajax request to search data on server. This use case is simple too. All search logic should be implemented on server side. Code snippet:
                 <p>
-                    <pre class="javascript"><code>$('#example2').meta_input({ajax: 'ajax.json'});
+                    <pre class="javascript"><code>$('#example2').meta_input({ajax: 'example.json'});
 </code></pre>
                 </p>
-                <small>This code will call URL <code>ajax.json?term=<i>user_input</i></code></small><br>
+                <small>This code will call URL <code>example.json?term=<i>user_input</i></code></small><br>
                 <small>Server should return ajax., formatted like this:</small>
                 <p><pre class="json"><code>{"data": [
   {"id": "1", "name": "Option One"},
