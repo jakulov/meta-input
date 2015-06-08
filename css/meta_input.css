@@ -1,0 +1,51 @@
+.mi-wrap {
+    border: 1px solid #dddddd;
+    background: #fff;
+}
+.mi-wrap input[type=text] {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+}
+.mi-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.mi-wrap table td {
+    padding: 0;
+    vertical-align: top;
+}
+.mi-wrap input[type=text] {
+    display: block;
+}
+.mi-suggest {
+    position: absolute;
+    max-height: 250px;
+    overflow-y: scroll;
+    background: #ffffff;
+    z-index: 1500;
+    border: 1px solid #dddddd;
+    display: none;
+}
+.mi-si {cursor: pointer;padding: 4px 8px;}
+.mi-si:hover, .mi-si.active {background: #eeeeee;  }
+.mi-sg {display: inline-block; float: left; background: #eeeeee; margin: 1px;}
+.mi-sg-label {float: left; padding: 6px 2px 6px 6px;}
+.mi-sg-rm {float: left; padding: 6px 6px 4px 4px; cursor: pointer}
+.mi-sg-rm:hover {color: blue}
+
+.dropdown {
+    position: relative;
+    float: right;
+    top: -18px;
+    margin-bottom: -18px;
+    display: inline-block;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    left: -12px;
+    vertical-align: middle;
+    border-top: 6px dashed;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+}

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Meta Input jQuery Widget | javascript autocomplete script for input and select tags</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/meta_input.css" rel="stylesheet">
+    <style>
+        h2 {
+            font-size: 22px;
+        }
+        table.custom-suggest {
+            width: 100%;
+        }
+        .example {
+            padding: 8px 10px;
+            background: #d1ebc7;
+        }
+        .explain {
+            padding: 10px 10px 20px 10px;
+        }
+        .custom-suggest>tbody>tr>td:first-child {
+            width: 50px;
+        }
+        .custom-suggest img {
+            width: 45px;
+            height: 45px;
+            border: 2px solid white;
+            border-radius: 50%;
+        }
+        .custom-suggest small {
+            color: #888;
+        }
+        .custom-suggest b {
+            display: block;
+            padding: 2px;
+            width: 100%;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="js/meta_input.js"></script>
+    <script>
+        var source = {"AF":"Afghanistan","AL":"Albania","DZ":"Algeria","AS":"American Samoa","AD":"Andorra","AO":"Angola","AI":"Anguilla","AQ":"Antarctica","AG":"Antigua and Barbuda","AR":"Argentina","AM":"Armenia","AW":"Aruba","AU":"Australia","AT":"Austria","AZ":"Azerbaijan","BS":"Bahamas","BH":"Bahrain","BD":"Bangladesh","BB":"Barbados","BY":"Belarus","BE":"Belgium","BZ":"Belize","BJ":"Benin","BM":"Bermuda","BT":"Bhutan","BO":"Bolivia","BA":"Bosnia and Herzegovina","BW":"Botswana","BV":"Bouvet Island","BR":"Brazil","BQ":"British Antarctic Territory","IO":"British Indian Ocean Territory","VG":"British Virgin Islands","BN":"Brunei","BG":"Bulgaria","BF":"Burkina Faso","BI":"Burundi","KH":"Cambodia","CM":"Cameroon","CA":"Canada","CT":"Canton and Enderbury Islands","CV":"Cape Verde","KY":"Cayman Islands","CF":"Central African Republic","TD":"Chad","CL":"Chile","CN":"China","CX":"Christmas Island","CC":"Cocos [Keeling] Islands","CO":"Colombia","KM":"Comoros","CG":"Congo - Brazzaville","CD":"Congo - Kinshasa","CK":"Cook Islands","CR":"Costa Rica","HR":"Croatia","CU":"Cuba","CY":"Cyprus","CZ":"Czech Republic","CI":"C\u00f4te d\u2019Ivoire","DK":"Denmark","DJ":"Djibouti","DM":"Dominica","DO":"Dominican Republic","NQ":"Dronning Maud Land","DD":"East Germany","EC":"Ecuador","EG":"Egypt","SV":"El Salvador","GQ":"Equatorial Guinea","ER":"Eritrea","EE":"Estonia","ET":"Ethiopia","FK":"Falkland Islands","FO":"Faroe Islands","FJ":"Fiji","FI":"Finland","FR":"France","GF":"French Guiana","PF":"French Polynesia","TF":"French Southern Territories","FQ":"French Southern and Antarctic Territories","GA":"Gabon","GM":"Gambia","GE":"Georgia","DE":"Germany","GH":"Ghana","GI":"Gibraltar","GR":"Greece","GL":"Greenland","GD":"Grenada","GP":"Guadeloupe","GU":"Guam","GT":"Guatemala","GG":"Guernsey","GN":"Guinea","GW":"Guinea-Bissau","GY":"Guyana","HT":"Haiti","HM":"Heard Island and McDonald Islands","HN":"Honduras","HK":"Hong Kong SAR China","HU":"Hungary","IS":"Iceland","IN":"India","ID":"Indonesia","IR":"Iran","IQ":"Iraq","IE":"Ireland","IM":"Isle of Man","IL":"Israel","IT":"Italy","JM":"Jamaica","JP":"Japan","JE":"Jersey","JT":"Johnston Island","JO":"Jordan","KZ":"Kazakhstan","KE":"Kenya","KI":"Kiribati","KW":"Kuwait","KG":"Kyrgyzstan","LA":"Laos","LV":"Latvia","LB":"Lebanon","LS":"Lesotho","LR":"Liberia","LY":"Libya","LI":"Liechtenstein","LT":"Lithuania","LU":"Luxembourg","MO":"Macau SAR China","MK":"Macedonia","MG":"Madagascar","MW":"Malawi","MY":"Malaysia","MV":"Maldives","ML":"Mali","MT":"Malta","MH":"Marshall Islands","MQ":"Martinique","MR":"Mauritania","MU":"Mauritius","YT":"Mayotte","FX":"Metropolitan France","MX":"Mexico","FM":"Micronesia","MI":"Midway Islands","MD":"Moldova","MC":"Monaco","MN":"Mongolia","ME":"Montenegro","MS":"Montserrat","MA":"Morocco","MZ":"Mozambique","MM":"Myanmar [Burma]","NA":"Namibia","NR":"Nauru","NP":"Nepal","NL":"Netherlands","AN":"Netherlands Antilles","NT":"Neutral Zone","NC":"New Caledonia","NZ":"New Zealand","NI":"Nicaragua","NE":"Niger","NG":"Nigeria","NU":"Niue","NF":"Norfolk Island","KP":"North Korea","VD":"North Vietnam","MP":"Northern Mariana Islands","NO":"Norway","OM":"Oman","PC":"Pacific Islands Trust Territory","PK":"Pakistan","PW":"Palau","PS":"Palestinian Territories","PA":"Panama","PZ":"Panama Canal Zone","PG":"Papua New Guinea","PY":"Paraguay","YD":"People's Democratic Republic of Yemen","PE":"Peru","PH":"Philippines","PN":"Pitcairn Islands","PL":"Poland","PT":"Portugal","PR":"Puerto Rico","QA":"Qatar","RO":"Romania","RU":"Russia","RW":"Rwanda","RE":"R\u00e9union","BL":"Saint Barth\u00e9lemy","SH":"Saint Helena","KN":"Saint Kitts and Nevis","LC":"Saint Lucia","MF":"Saint Martin","PM":"Saint Pierre and Miquelon","VC":"Saint Vincent and the Grenadines","WS":"Samoa","SM":"San Marino","SA":"Saudi Arabia","SN":"Senegal","RS":"Serbia","CS":"Serbia and Montenegro","SC":"Seychelles","SL":"Sierra Leone","SG":"Singapore","SK":"Slovakia","SI":"Slovenia","SB":"Solomon Islands","SO":"Somalia","ZA":"South Africa","GS":"South Georgia and the South Sandwich Islands","KR":"South Korea","ES":"Spain","LK":"Sri Lanka","SD":"Sudan","SR":"Suriname","SJ":"Svalbard and Jan Mayen","SZ":"Swaziland","SE":"Sweden","CH":"Switzerland","SY":"Syria","ST":"S\u00e3o Tom\u00e9 and Pr\u00edncipe","TW":"Taiwan","TJ":"Tajikistan","TZ":"Tanzania","TH":"Thailand","TL":"Timor-Leste","TG":"Togo","TK":"Tokelau","TO":"Tonga","TT":"Trinidad and Tobago","TN":"Tunisia","TR":"Turkey","TM":"Turkmenistan","TC":"Turks and Caicos Islands","TV":"Tuvalu","UM":"U.S. Minor Outlying Islands","PU":"U.S. Miscellaneous Pacific Islands","VI":"U.S. Virgin Islands","UG":"Uganda","UA":"Ukraine","SU":"Union of Soviet Socialist Republics","AE":"United Arab Emirates","GB":"United Kingdom","US":"United States","ZZ":"Unknown or Invalid Region","UY":"Uruguay","UZ":"Uzbekistan","VU":"Vanuatu","VA":"Vatican City","VE":"Venezuela","VN":"Vietnam","WK":"Wake Island","WF":"Wallis and Futuna","EH":"Western Sahara","YE":"Yemen","ZM":"Zambia","ZW":"Zimbabwe","AX":"\u00c5land Islands"};
+        function sourceValues() {
+            var values = [];
+            $.each(source, function(e){
+                values.push(source[e]);
+            });
+            return values;
+        }
+        var sourceNames = sourceValues();
+    </script>
+</head>
+<body>
+<div class="container">
+    <div class="page-header">
+        <h1>Meta Input</h1>
+        <div class="pull-right" style="position: relative; top: -40px;">
+            by <a href="https://github.com/jakulov" target="_blank">@jakulov</a>
+        </div>
+    </div>
+    <div class="jumbotron">
+        <p class="lead">
+            jQuery plugin, allows you to easily customize html input's and select's into user friendly ui-widgets,
+            with autocomplete, ajax-search, choosing multiple options and custom suggest template.
+        </p>
+        <div>
+            <a class="btn btn-lg btn-primary" href="https://github.com/jakulov/meta_input" target="_blank">
+                <i class="glyphicon glyphicon-list"></i>
+                Source on GitHub
+            </a>
+            &nbsp;&nbsp;
+            <a class="btn btn-lg btn-warning" href="#examples">
+                <i class="glyphicon glyphicon-eye-open"></i>
+                Live demo & docs
+            </a>
+            &nbsp;&nbsp;
+            <a class="btn btn-lg btn-default" href="https://github.com/jakulov/meta_input.tar.gz">
+                <i class="glyphicon glyphicon-download-alt"></i>
+                Download .tar.gz
+            </a>
+        </div>
+        <a name="examples"></a>
+    </div>
+    <div class="row">
+        <div class="col col-md-6">
+            <ol>
+                <small>Contents:</small>
+                <li><a href="#p1">Simple autocomplete</a></li>
+                <li><a href="#p1">Multiple choose</a></li>
+                <li><a href="#p2">Using with select tag</a></li>
+                <li><a href="#p2">Ajax data source</a></li>
+                <li><a href="#p3">Setting value</a></li>
+                <li><a href="#p3">Customize suggest template</a></li>
+                <li><a href="#p4">Options reference</a></li>
+            </ol>
+        </div>
+    </div>
+    <a name="p1"></a>
+    <hr>
+    <div class="row">
+        <div class="col col-md-6">
+            <h2>1. Simple autocomplete</h2>
+            <div class="example">
+                <input type="text" name="example1" placeholder="Type to search" id="example1" class="form-control">
+                <script>
+                    $(function(){
+                        $('#example1').meta_input({data: sourceNames});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Simple autocomplete on input tag with default options.
+                We only need to set data for widget. Code snippet:
+                <p>
+                    <pre class="javascript"><code>$('#example1').meta_input({data: [
+    "Afganistan",
+    "Albalia",
+    "Austria",
+    ...
+]});
+</code></pre>
+                </p>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <h2>2. Multiple choose</h2>
+            <div class="example">
+                <input type="text" name="example2" placeholder="Type to search" id="example2" class="form-control">
+                <script>
+                    $(function(){
+                        $('#example2').meta_input({data: sourceNames, multiple: true, customValues: true});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Autocomplete on input with "multiple" option. <br>Code snippet:
+                <p>
+                    <pre class="javascript"><code>$('#example2').meta_input({data: [
+    "Afganistan",
+    "Albalia",
+    ...
+], multiple: true, customValues: true});
+</code></pre>
+                </p>
+                <small>Here you can also see extra option "customValues" - it allows user to input custom values, that's not in data list</small>
+            </div>
+        </div>
+    </div>
+    <a name="p2"></a>
+    <hr>
+    <div class="row">
+        <div class="col col-md-6">
+            <h2>3. Using with &lt;select&gt;</h2>
+            <div class="example">
+                <select name="example3" id="example3" class="form-control" multiple>
+                    <option value="1">Option One</option>
+                    <option value="2">Option Two</option>
+                    <option value="3">Option Three</option>
+                    <option value="4">Option Four</option>
+                    <option value="5">Option Five</option>
+                    <option value="6">Option Six</option>
+                    <option value="7">Option Seven</option>
+                    <option value="8">Option Eight</option>
+                    <option value="9">Option Nine</option>
+                    <option value="10">Option Ten</option>
+                </select>
+                <script>
+                    $(function(){
+                        $('#example3').meta_input();
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Using with select tag is even more simple:
+                <p>
+                    <pre class="javascript"><code>$('#example3').meta_input();
+</code></pre>
+                </p>
+                <small>No any options required, cause data option automaticly creates from select options.<br><br> Also using with select tag has a different behaviour: suggest shows even if there's no term to search. You can have this affect on input tag to by using "select" option</small>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <h2>4. Ajax search</h2>
+            <div class="example">
+                <input type="text" name="example4" placeholder="Type to search" id="example4" class="form-control">
+                <script>
+                    $(function(){
+                        $('#example4').meta_input({ajax: 'ajax.json'});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Using ajax request to search data on server. This use case is simple too. All search logic should be implemented on server side. Code snippet:
+                <p>
+                    <pre class="javascript"><code>$('#example2').meta_input({ajax: 'ajax.json'});
+</code></pre>
+                </p>
+                <small>This code will call URL <code>ajax.json?term=<i>user_input</i></code></small><br>
+                <small>Server should return ajax., formatted like this:</small>
+                <p><pre class="json"><code>{"data": [
+  {"id": "1", "name": "Option One"},
+  ...
+]}</code></pre></p>
+            </div>
+        </div>
+    </div>
+    <a name="p3"></a>
+    <hr>
+    <div class="row">
+        <div class="col col-md-6">
+            <h2>5. Setting value</h2>
+            <div class="example">
+                <input type="text" name="example5_1" placeholder="Type to search" id="example5_1" class="form-control" value="Ukraine">
+                <script>
+                    $(function(){
+                        $('#example5_1').meta_input({data: sourceNames});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Setting value for widget with single value (using value attribute):
+                <p><pre class="javascript"><code style="font-size: 10px;">&ltinput type="text" placeholder="Type to search" id="example5_1" value="Ukraine">
+&ltscript>
+    $(function(){
+        $('#example5_1').meta_input({data: ["USA", "Ukraine", ...]});
+    });
+&lt/script></code></pre></p>
+            </div>
+
+            <div class="example">
+                <input type="text" name="example5_2" placeholder="Type to search" id="example5_2" class="form-control">
+                <script>
+                    $(function(){
+                        var sourceAlt = [
+                            {"id": "1", "name": "Option One"},
+                            {"id": "2", "name": "Option Two"},
+                            {"id": "3", "name": "Option Three"},
+                            {"id": "4", "name": "Option Four"},
+                            {"id": "5", "name": "Option Five"},
+                            {"id": "6", "name": "Option Six"},
+                            {"id": "7", "name": "Option Seven"},
+                            {"id": "8", "name": "Option Eight"},
+                            {"id": "9", "name": "Option Nine"},
+                            {"id": "10", "name": "Option Ten"}
+                        ];
+                        $('#example5_2').meta_input({data: sourceAlt, value: {id: "1", name: "Option One"}});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Setting value for widget with single value object with id:
+                <p><pre class="javascript"><code style="font-size: 10px;">$('#example5_2').meta_input({
+    data: [
+        {"id": "1", "name": "Option One"},
+        {"id": "2", "name": "Option Two"},
+    ],
+    value: {id: "1", name: "Option One"}
+});</code></pre></p>
+            </div>
+
+            <div class="example">
+                <input type="text" name="example5_3" placeholder="Type to search" id="example5_3" class="form-control" value="">
+                <script>
+                    $(function(){
+                        $('#example5_3').meta_input({data: sourceNames, value: ["Ukraine", "Russia"], multiple: true});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                Setting value for widget with miltiple values:
+                <p><pre class="javascript"><code style="font-size: 10px;">$('#example5_3').meta_input({
+    data: ["USA", "Ukraine", ...],
+    value: ["Ukraine", "Russia"], multiple: true
+});</code></pre></p>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <h2>6. Customize suggest</h2>
+            <div class="example">
+                <input type="text" name="example6" placeholder="Type to search" id="example6" class="form-control" value="">
+                <script>
+                    $(function(){
+                        var sourcePeople = [
+                            {id:"1", name:"Mark Zukerberg","company":"Facebook", "pic":"img/pic1.jpg"},
+                            {id:"2", name:"Matt Cuts","company":"Google", "pic":"img/pic2.jpeg"},
+                            {id:"3", name:"Steve Jobs","company":"Apple", "pic":"img/pic3.jpeg"},
+                            {id:"4", name:"Ilya Segalovich","company":"Yandex", "pic":"img/pic4.jpg"},
+                            {id:"5", name:"Alexandr Volozh","company":"Yandex", "pic":"img/pic5.jpg"},
+                            {id:"6", name:"Sergey Brin","company":"Google", "pic":"img/pic6.jpeg"},
+                        ];
+                        $('#example6').meta_input({data: sourcePeople, suggestTemplate: '<table class="custom-suggest"><tr><td><img src="{{pic}}"></td><td><b>{{name}}</b><small>{{company}}</small></td></tr></table>'});
+                    });
+                </script>
+            </div>
+            <div class="explain">
+                It's pretty easy to use custom templates for rendering suggest items.<br>
+                You can fully specify your own html template, using for render single suggest item.
+                For example, we want to view person's suggest list with photos and some extra information.
+                It's doing like this:
+                <p><pre class="javascript"><code>var sourcePeople = [
+    {
+        id:"1",
+        name:"Mark Zukerberg",
+        company:"Facebook",
+        pic:"img/pic1.jpg"
+    },
+    {
+        id:"2",
+        name:"Matt Cuts",
+        company:"Google",
+        pic:"img/pic2.jpeg"
+    },
+    ...
+];
+$('#example6').meta_input({
+    data: sourcePeople,
+    suggestTemplate: '&lt;table class="custom-suggest">&lt;tr>&lt;td>&lt;img src="{{pic}}">&lt;/td>&lt;td>&lt;b>{{name}}&lt;/b>&lt;small>{{company}}&lt;/small>&lt;/td>&lt;/tr>&lt;/table>'
+});</code></pre></p>
+                All template placeholders, like "{{some_key}}" will be replaced with item's some_key value. Than use your CSS skills, to get what you want. My example presented above.
+            </div>
+        </div>
+    </div>
+    <a name="p4"></a>
+    <hr>
+    <div class="row">
+        <div class="col col-md-12">
+            <h2>7. Options</h2>
+            <div>
+                <p>With help of options you can control most features of widget.</p>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>option</th>
+                        <th>type</th>
+                        <th>description</th>
+                        <th>default</th>
+                        <th>note</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><b>multiple</b></td>
+                        <td>bool</td>
+                        <td>Allow to select multiple values</td>
+                        <td><code>false</code></td>
+                        <td><small>can be set to <code>true</code> with tag attribute "multiple"</small></td>
+                    </tr>
+                    <tr>
+                        <td><b>data</b></td>
+                        <td>array</td>
+                        <td>Data for autocomplete</td>
+                        <td><code>[]</code></td>
+                        <td><small>Can be used in format: <code>['Option 1', 'Option 2' ...]</code> <br>
+                            or <code>[{id:1, name:'Option 1'}, {id:2, name:'Option 2' ...}]</code>. <br>
+                            Objects in array also can contain extra fields</small></td>
+                    </tr>
+                    <tr>
+                        <td><b>value</b></td>
+                        <td>array|object|string</td>
+                        <td>Pre selected value(s)</td>
+                        <td><code>null</code></td>
+                        <td><small>Can be used in format: <code>'Option 1'</code>, <code>['Option 1', 'Option 2' ...]</code> <br>
+                            or <code>[{id:1, name:'Option 1'}, {id:2, name:'Option 2' ...}]</code>. <br>
+                            For more see example #5</small></td>
+                    </tr>
+                    <tr>
+                        <td><b>ajax</b></td>
+                        <td>string</td>
+                        <td>Call <code>$.getJSON(ajax, {term: term})</code> for getting data for autocomplete.</td>
+                        <td><code>''</code></td>
+                        <td><small>Cannot be used with select tags</small></td>
+                    </tr>
+                    <tr>
+                        <td><b>match</b></td>
+                        <td>array</td>
+                        <td>Which fields of data item object should be matched against term.</td>
+                        <td><code>['name']</code></td>
+                        <td><small></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>matchFirst</b></td>
+                        <td>bool</td>
+                        <td>Match term only with string's start.</td>
+                        <td><code>false</code></td>
+                        <td><small></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>filterSame</b></td>
+                        <td>bool</td>
+                        <td>Hide already selected items.</td>
+                        <td><code>true</code></td>
+                        <td><small></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>limit</b></td>
+                        <td>int</td>
+                        <td>Limit of shown matched data items.</td>
+                        <td><code>100</code></td>
+                        <td><small></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>inputTimeout</b></td>
+                        <td>int</td>
+                        <td>Timeout (in milliseconds) between user presses key and widget starts to search suggests.</td>
+                        <td><code>400</code></td>
+                        <td><small></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>select</b></td>
+                        <td>bool</td>
+                        <td>Allow select options without type term to search</td>
+                        <td><code>false</code></td>
+                        <td><small>When using with select tag, it's always sets to <code>true</code></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>customValues</b></td>
+                        <td>bool</td>
+                        <td>Allow user to select value, that's not in the list of options</td>
+                        <td><code>false</code></td>
+                        <td><small>When using with select tag, it's always sets to <code>false</code></small></td>
+                    </tr>
+                    <tr>
+                        <td><b>selectPlaceholder</b></td>
+                        <td>string</td>
+                        <td>Placeholder in input, when using with select tag</td>
+                        <td><code>'Type&nbsp;to&nbsp;filter'</code></td>
+                        <td><small>With input tag it's used placeholder from tag</small></td>
+                    </tr>
+                    <tr>
+                        <td><b>suggestTemplate</b></td>
+                        <td>string</td>
+                        <td>HTML template for formatting suggest item. Substrings like "{{key}}" will be replaceed with data item key</td>
+                        <td><code>'{{name}}'</code></td>
+                        <td><small>See more in example #6</small></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row" style="text-align: center;">
+        <a href="#" class="btn btn-lg btn-default"><i class="glyphicon glyphicon-arrow-up"></i> Back to top</a>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col col-md-10">
+            Shared with <a href="http://opensource.org/licenses/MIT" target="_blank">MIT Licence</a>
+        </div>
+        <div class="col col-md-2">
+            &copy; <a href="http://jakulov.ru">jakulov.ru</a>
+        </div>
+    </div>
+    <hr>
+</div>
+</body>
+</html>
