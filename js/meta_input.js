@@ -452,10 +452,38 @@
             return data;
         };
 
+        /**
+         * @param select
+         * @returns {Array}
+         * @private
+         */
+        this._getSelectValue = function(select) {
+            var data = [];
+            var hasValues = select.find('option:first').attr('value');
+            if(typeof hasValues !== typeof undefined && hasValues !== false) {
+                select.find('option:selected').each(function(){
+                    data.push({
+                        id: $(this).attr('value'),
+                        name: $(this).text()
+                    });
+                });
+            }
+            else {
+                select.find('option:selected').each(function(){
+                    data.push($(this).text());
+                });
+            }
+
+            return data;
+        };
+
         this._name = this.attr('name');
 
         if(this.prop('tagName') === 'SELECT') {
             this.options.data = this._getSelectData(this);
+            if(!this.options.value) {
+                this.options.value = this._getSelectValue(this)
+            }
             if(this.prop('multiple')) {
                 this.options.multiple = true;
             }
