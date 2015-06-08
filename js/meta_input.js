@@ -8,6 +8,7 @@
      * @returns {jQuery}
      */
     $.fn.meta_input = function( options ) {
+
         this.options = $.extend({
             multiple: false,
             ajax: '',
@@ -23,6 +24,13 @@
             data: [],
             value: null
         }, options );
+
+        if(this.length > 1) {
+            this.each(function(){
+                $(this).meta_input(options);
+            });
+            return this;
+        }
 
         /**
          * @private
@@ -235,7 +243,7 @@
                 if(Array.isArray(self.options.value)) {
                     $.each(self.options.value, function(i) {
                         var valItem = self.options.value[i];
-                        if(typeof valItem == 'string') {
+                        if(typeof valItem === 'string') {
                             self._addValueItem(valItem, valItem);
                         }
                         else {
@@ -244,8 +252,7 @@
                     });
                 }
                 else {
-                    console.log(self.options.value);
-                    if(typeof self.options.value == 'string') {
+                    if(typeof self.options.value === 'string') {
                         self._addValueItem(self.options.value, self.options.value);
                     }
                     else {
@@ -253,7 +260,7 @@
                     }
                 }
             }
-        }
+        };
 
         /**
          * @returns {*}
@@ -382,7 +389,7 @@
                 for(var i = 0; i < self.options.data.length; i++) {
                     var item = self.options.data[i];
                     if(!term || self._matchItem(item, term)) {
-                        data.push(typeof item == 'string' ? {id:item, name:item} : item);
+                        data.push(typeof item === 'string' ? {id:item, name:item} : item);
                         found++;
                         if(found >= self.options.limit) {
                             break;
@@ -401,7 +408,7 @@
          * @private
          */
         this._matchItem = function(item, term) {
-            if(typeof item == 'string') {
+            if(typeof item === 'string') {
                 var idx = item.toLocaleLowerCase().indexOf(term);
                 if( (self.options.matchFirst && idx === 0) || (!self.options.matchFirst && idx !== -1) ) {
                     return true;
@@ -447,7 +454,7 @@
 
         this._name = this.attr('name');
 
-        if(this.prop('tagName') == 'SELECT') {
+        if(this.prop('tagName') === 'SELECT') {
             this.options.data = this._getSelectData(this);
             if(this.prop('multiple')) {
                 this.options.multiple = true;

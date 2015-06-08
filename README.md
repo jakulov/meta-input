@@ -1,5 +1,6 @@
 # Meta input
 
+version 0.1
 Simple light weight jQuery widget, allows you to customize html input and select tags into user friendly elements with autocomplete, multiple choose and more.
  
 Demos and documentation [meta-input.jakulov.ru](http://meta-input.jakulov.ru)
@@ -15,12 +16,8 @@ Demos and documentation [meta-input.jakulov.ru](http://meta-input.jakulov.ru)
             $('#myInput').meta_input({data: ['Option 1', 'Option 2', ...]});
         });
     </script>
-    
-# TODO
 
-1. minInputLength option
-2. test in browsers
-3. bind to elements collection
-4. API
 
 # CHANGELOG
+
+v0.1 Initial state
