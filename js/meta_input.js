@@ -36,9 +36,6 @@
          * @private
          */
         this._init = function() {
-            if(self.options.required) {
-                self._input.prop('required', true);
-            }
             if(self.options.select) {
                 self._wrap.find('.mi-input').append('<div class="dropdown">');
                 self._wrap.find('.dropdown').on('click', function(e){
@@ -58,8 +55,6 @@
                 });
             }
 
-
-
             self._wrap.find('tr').prepend('<td class="mi-selected">');
             self._wrap.find('.mi-input').append($('<div class="mi-suggest">'));
             self._resetStyle();
@@ -72,7 +67,7 @@
                 }
                 self.requestTimeout = window.setTimeout(function(){
                     self.showSuggest();
-                }, 400);
+                }, self.options.inputTimeout);
             });
 
             self._input.on('keydown', function(event) {
@@ -104,7 +99,7 @@
                         }
                         self.requestTimeout = window.setTimeout(function(){
                             self.showSuggest();
-                        }, 400);
+                        }, self.options.inputTimeout);
                     }
                 }
             });
@@ -204,25 +199,11 @@
          */
         this._addValueItem = function(value, label) {
             var vi = $(
-                '<div class="mi-sg" id="'+ self._getValueItemId(1) +'"><div class="mi-sg-label">'+ label +'</div><div class="mi-sg-rm">&times;</div>' +
+                '<div class="mi-sg"><div class="mi-sg-label">'+ label +'</div><div class="mi-sg-rm">&times;</div>' +
                 '<input type="hidden" name="'+ self._name +'" value="'+ value +'"></div>'
             );
             self._wrap.find('.mi-selected').append(vi);
             self._fixWidth();
-        };
-
-        /**
-         * @param inc
-         * @returns {string}
-         * @private
-         */
-        this._getValueItemId = function(inc){
-            var id = self._wrap.find('.mi-sg').length;
-            if(inc) {
-                id += 1;
-            }
-
-            return self._name.replace(/\[\]/, '__') + '_' + id;
         };
 
         /**
@@ -379,6 +360,7 @@
             if(self.options.ajax) {
                 $.getJSON(self.options.ajax, {term: term}, function(json) {
                     if(json && json.data) {
+                        self.termCache[term] = json.data;
                         self._displayTermData(json.data);
                     }
                 });
@@ -397,6 +379,7 @@
                     }
                 }
 
+                self.termCache[term] = data;
                 self._displayTermData(data);
             }
         };
@@ -482,7 +465,7 @@
         if(this.prop('tagName') === 'SELECT') {
             this.options.data = this._getSelectData(this);
             if(!this.options.value) {
-                this.options.value = this._getSelectValue(this)
+                this.options.value = this._getSelectValue(this);
             }
             if(this.prop('multiple')) {
                 this.options.multiple = true;

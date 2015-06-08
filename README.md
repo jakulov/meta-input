@@ -17,7 +17,11 @@ Demos and documentation [meta-input.jakulov.ru](http://meta-input.jakulov.ru)
             $('#myInput').meta_input({data: ['Option 1', 'Option 2', ...]});
         });
     </script>
+    
+# TODO
 
+- Callbacks
+- API
 
 # CHANGELOG
 
